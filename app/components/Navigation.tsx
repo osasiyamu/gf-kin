@@ -1,4 +1,5 @@
-import { Activity } from "lucide-react";
+import { Activity, Menu, X } from "lucide-react";
+import { useState } from "react";
 
 type Page = "home" | "services" | "blog" | "booking";
 
@@ -8,23 +9,31 @@ interface NavigationProps {
 }
 
 export function Navigation({ currentPage, onNavigate }: NavigationProps) {
+  const [open, setOpen] = useState(false);
+
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top Bar */}
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <button
-            onClick={() => onNavigate("home")}
+            onClick={() => {
+              onNavigate("home");
+              setOpen(false);
+            }}
             className="flex items-center gap-2 group"
           >
             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500">
               <Activity className="w-6 h-6 text-white" strokeWidth={2.5} />
             </div>
-            <span className="text-slate-800 tracking-wide">GF-Kin</span>
+            <span className="text-slate-800 font-medium tracking-wide">
+              GF-Kin
+            </span>
           </button>
 
-          {/* Navigation Links */}
-          <div className="flex gap-8">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-8">
             <button
               onClick={() => onNavigate("home")}
               className={`transition-colors ${
@@ -35,6 +44,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             >
               Home
             </button>
+
             <button
               onClick={() => onNavigate("services")}
               className={`transition-colors ${
@@ -45,6 +55,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             >
               Services
             </button>
+
             <button
               onClick={() => onNavigate("blog")}
               className={`transition-colors ${
@@ -55,6 +66,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             >
               Blog
             </button>
+
             <button
               onClick={() => onNavigate("booking")}
               className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
@@ -62,7 +74,78 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               Book Appointment
             </button>
           </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            className="md:hidden p-2 rounded-lg hover:bg-slate-100"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? (
+              <X className="w-6 h-6 text-slate-700" />
+            ) : (
+              <Menu className="w-6 h-6 text-slate-700" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {open && (
+          <div className="md:hidden pb-4 animate-slide-down">
+            <div className="flex flex-col gap-3 pt-2">
+              <button
+                onClick={() => {
+                  onNavigate("home");
+                  setOpen(false);
+                }}
+                className={`px-2 py-2 text-left text-base ${
+                  currentPage === "home"
+                    ? "text-emerald-600 font-medium"
+                    : "text-slate-700"
+                }`}
+              >
+                Home
+              </button>
+
+              <button
+                onClick={() => {
+                  onNavigate("services");
+                  setOpen(false);
+                }}
+                className={`px-2 py-2 text-left text-base ${
+                  currentPage === "services"
+                    ? "text-emerald-600 font-medium"
+                    : "text-slate-700"
+                }`}
+              >
+                Services
+              </button>
+
+              <button
+                onClick={() => {
+                  onNavigate("blog");
+                  setOpen(false);
+                }}
+                className={`px-2 py-2 text-left text-base ${
+                  currentPage === "blog"
+                    ? "text-emerald-600 font-medium"
+                    : "text-slate-700"
+                }`}
+              >
+                Blog
+              </button>
+
+              <button
+                onClick={() => {
+                  onNavigate("booking");
+                  setOpen(false);
+                }}
+                className="mt-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-center"
+              >
+                Book Appointment
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

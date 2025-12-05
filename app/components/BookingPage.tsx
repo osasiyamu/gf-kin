@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import {
   Calendar,
@@ -13,6 +15,7 @@ export function BookingPage() {
   const [step, setStep] = useState<"booking" | "payment" | "confirmation">(
     "booking"
   );
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -63,6 +66,8 @@ export function BookingPage() {
 
   const selectedService = services.find((s) => s.name === formData.service);
 
+  /* -------------------------------- CONFIRMATION -------------------------------- */
+
   if (step === "confirmation") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 py-20 px-4">
@@ -71,10 +76,12 @@ export function BookingPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 mb-6">
               <Check className="w-8 h-8 text-emerald-600" />
             </div>
+
             <h1 className="text-slate-900 mb-4">Booking Confirmed!</h1>
+
             <p className="text-slate-600 mb-8">
-              Your appointment has been successfully scheduled. You will receive
-              a confirmation email shortly with all the details.
+              Your appointment has been successfully scheduled. A confirmation
+              email will be sent shortly.
             </p>
 
             <div className="bg-slate-50 rounded-xl p-6 mb-8 text-left">
@@ -127,10 +134,17 @@ export function BookingPage() {
               Book Another Appointment
             </button>
           </div>
+
+          {/* Footer */}
+          <footer className="mt-10 text-center text-slate-600">
+            <p>&copy; 2025 GF-Kin. All rights reserved.</p>
+          </footer>
         </div>
       </div>
     );
   }
+
+  /* -------------------------------- PAYMENT -------------------------------- */
 
   if (step === "payment") {
     return (
@@ -212,6 +226,7 @@ export function BookingPage() {
                         required
                       />
                     </div>
+
                     <div>
                       <label className="block text-slate-700 mb-2">CVV</label>
                       <input
@@ -247,7 +262,7 @@ export function BookingPage() {
 
             {/* Order Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-2xl shadow-xl p-6 sticky top-24">
+              <div className="bg-white rounded-2xl shadow-xl p-6 lg:sticky lg:top-24">
                 <h3 className="text-slate-900 mb-4">Order Summary</h3>
 
                 <div className="space-y-4 mb-6">
@@ -276,6 +291,11 @@ export function BookingPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Footer */}
+              <footer className="mt-8 text-center text-slate-600">
+                <p>&copy; 2025 GF-Kin. All rights reserved.</p>
+              </footer>
             </div>
           </div>
         </div>
@@ -283,14 +303,16 @@ export function BookingPage() {
     );
   }
 
+  /* -------------------------------- BOOKING -------------------------------- */
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-slate-900 mb-4">Book Your Appointment</h1>
           <p className="text-slate-600 max-w-2xl mx-auto">
-            Schedule your kinesiology session and take the first step towards
-            better health and wellness.
+            Schedule your kinesiology session and take the first step toward
+            better health.
           </p>
         </div>
 
@@ -299,7 +321,9 @@ export function BookingPage() {
             {/* Personal Information */}
             <div>
               <h3 className="text-slate-900 mb-4">Personal Information</h3>
+
               <div className="grid md:grid-cols-2 gap-4">
+                {/* Name */}
                 <div>
                   <label className="block text-slate-700 mb-2">
                     Full Name *
@@ -319,6 +343,7 @@ export function BookingPage() {
                   </div>
                 </div>
 
+                {/* Email */}
                 <div>
                   <label className="block text-slate-700 mb-2">Email *</label>
                   <div className="relative">
@@ -336,6 +361,7 @@ export function BookingPage() {
                   </div>
                 </div>
 
+                {/* Phone */}
                 <div className="md:col-span-2">
                   <label className="block text-slate-700 mb-2">
                     Phone Number *
@@ -357,13 +383,14 @@ export function BookingPage() {
               </div>
             </div>
 
-            {/* Service Selection */}
+            {/* Select Service */}
             <div>
               <h3 className="text-slate-900 mb-4">Select Service</h3>
+
               <div className="grid gap-3">
-                {services.map((service, index) => (
+                {services.map((service) => (
                   <label
-                    key={index}
+                    key={service.name}
                     className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all ${
                       formData.service === service.name
                         ? "border-emerald-600 bg-emerald-50"
@@ -377,7 +404,10 @@ export function BookingPage() {
                         value={service.name}
                         checked={formData.service === service.name}
                         onChange={(e) =>
-                          setFormData({ ...formData, service: e.target.value })
+                          setFormData({
+                            ...formData,
+                            service: e.target.value,
+                          })
                         }
                         className="w-4 h-4 text-emerald-600"
                         required
@@ -389,16 +419,19 @@ export function BookingPage() {
                         </div>
                       </div>
                     </div>
+
                     <div className="text-slate-900">{service.price}</div>
                   </label>
                 ))}
               </div>
             </div>
 
-            {/* Date and Time */}
+            {/* Date & Time */}
             <div>
               <h3 className="text-slate-900 mb-4">Choose Date & Time</h3>
+
               <div className="grid md:grid-cols-2 gap-4">
+                {/* Date */}
                 <div>
                   <label className="block text-slate-700 mb-2">Date *</label>
                   <div className="relative">
@@ -416,6 +449,7 @@ export function BookingPage() {
                   </div>
                 </div>
 
+                {/* Time */}
                 <div>
                   <label className="block text-slate-700 mb-2">Time *</label>
                   <div className="relative">
@@ -425,12 +459,12 @@ export function BookingPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, time: e.target.value })
                       }
-                      className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 appearance-none"
+                      className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                       required
                     >
                       <option value="">Select time</option>
-                      {timeSlots.map((time, index) => (
-                        <option key={index} value={time}>
+                      {timeSlots.map((time) => (
+                        <option key={time} value={time}>
                           {time}
                         </option>
                       ))}
@@ -440,36 +474,37 @@ export function BookingPage() {
               </div>
             </div>
 
-            {/* Additional Notes */}
+            {/* Notes */}
             <div>
               <label className="block text-slate-700 mb-2">
-                Additional Notes (Optional)
+                Additional Notes (optional)
               </label>
               <textarea
-                placeholder="Any specific concerns or information I should know about..."
+                placeholder="Any specific concerns or info you'd like to share..."
                 value={formData.notes}
                 onChange={(e) =>
                   setFormData({ ...formData, notes: e.target.value })
                 }
                 rows={4}
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
-              />
+                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              ></textarea>
             </div>
 
+            {/* Submit */}
             <button
               type="submit"
-              className="w-full py-4 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+              className="w-full py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
             >
               Continue to Payment
             </button>
           </form>
         </div>
-      </div>
 
-      {/* Footer */}
-      <footer className="mt-20 text-center text-slate-600">
-        <p>&copy; 2025 GF-Kin. All rights reserved.</p>
-      </footer>
+        {/* Footer */}
+        <footer className="mt-20 text-center text-slate-600">
+          <p>&copy; 2025 GF-Kin. All rights reserved.</p>
+        </footer>
+      </div>
     </div>
   );
 }

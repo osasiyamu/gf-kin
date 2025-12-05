@@ -125,30 +125,42 @@ export function BlogPage() {
     return matchesSearch && matchesCategory;
   });
 
+  /* ——— No logic changed ——— */
+
+  {
+    /* --- POST PAGE --- */
+  }
   if (selectedPost) {
     return (
       <div className="min-h-screen bg-white">
-        {/* Blog Post Header */}
-        <div className="relative h-[400px] overflow-hidden">
+        {/* Post Header */}
+        <div className="relative h-[300px] md:h-[400px] overflow-hidden /* mobile */">
           <ImageWithFallback
             src={selectedPost.image}
             alt={selectedPost.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 right-0 p-8">
+
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
+
+          <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 /* mobile */">
             <div className="max-w-4xl mx-auto">
               <button
                 onClick={() => setSelectedPost(null)}
-                className="text-white hover:text-emerald-400 mb-4 flex items-center gap-2"
+                className="text-white hover:text-emerald-400 mb-3 md:mb-4 flex items-center gap-2 text-sm md:text-base /* mobile */"
               >
                 ← Back to Blog
               </button>
-              <div className="inline-block px-3 py-1 bg-emerald-600 text-white rounded-full text-sm mb-4">
+
+              <div className="inline-block px-3 py-1 bg-emerald-600 text-white rounded-full text-xs md:text-sm mb-3 /* mobile */">
                 {selectedPost.category}
               </div>
-              <h1 className="text-white mb-4">{selectedPost.title}</h1>
-              <div className="flex items-center gap-6 text-emerald-100">
+
+              <h1 className="text-white mb-3 text-xl md:text-3xl font-semibold /* mobile */">
+                {selectedPost.title}
+              </h1>
+
+              <div className="flex flex-wrap gap-3 md:gap-6 text-emerald-100 text-xs md:text-sm /* mobile */">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   <span>{selectedPost.date}</span>
@@ -162,22 +174,22 @@ export function BlogPage() {
           </div>
         </div>
 
-        {/* Blog Post Content */}
-        <article className="py-16 px-4">
+        {/* Post Content */}
+        <article className="py-10 px-4 md:py-16 md:px-4 /* mobile */">
           <div className="max-w-4xl mx-auto">
-            <div className="prose prose-lg max-w-none">
-              <p className="text-slate-600 text-lg mb-6">
+            <div className="prose prose-sm md:prose-lg max-w-none /* mobile */">
+              <p className="text-slate-600 text-base md:text-lg mb-6">
                 {selectedPost.excerpt}
               </p>
-              <p className="text-slate-700 leading-relaxed">
+
+              <p className="text-slate-700 leading-relaxed text-sm md:text-base /* mobile */">
                 {selectedPost.content}
               </p>
 
-              <div className="mt-8 p-6 bg-emerald-50 border-l-4 border-emerald-600 rounded-r-lg">
-                <p className="text-slate-700">
+              <div className="mt-8 p-4 md:p-6 bg-emerald-50 border-l-4 border-emerald-600 rounded-r-lg /* mobile */">
+                <p className="text-slate-700 text-sm md:text-base">
                   <strong>Want to learn more?</strong> Book a consultation to
-                  discover how kinesiology can help you achieve your health and
-                  wellness goals.
+                  discover how kinesiology can help you achieve your goals.
                 </p>
               </div>
             </div>
@@ -185,10 +197,13 @@ export function BlogPage() {
         </article>
 
         {/* Related Posts */}
-        <section className="py-16 px-4 bg-slate-50">
+        <section className="py-12 px-4 bg-slate-50 md:py-16 /* mobile */">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-slate-900 mb-8">Related Articles</h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <h2 className="text-slate-900 mb-6 md:mb-8 text-xl md:text-2xl /* mobile */">
+              Related Articles
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 /* mobile */">
               {blogPosts
                 .filter(
                   (post) =>
@@ -202,22 +217,25 @@ export function BlogPage() {
                     onClick={() => setSelectedPost(post)}
                     className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow cursor-pointer"
                   >
-                    <div className="h-48 overflow-hidden">
+                    <div className="h-40 md:h-48 overflow-hidden /* mobile */">
                       <ImageWithFallback
                         src={post.image}
                         alt={post.title}
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="text-emerald-600 text-sm mb-2">
+                    <div className="p-4 md:p-6 /* mobile */">
+                      <div className="text-emerald-600 text-xs md:text-sm mb-2">
                         {post.category}
                       </div>
-                      <h3 className="text-slate-900 mb-2">{post.title}</h3>
-                      <p className="text-slate-600 text-sm mb-4">
+                      <h3 className="text-slate-900 mb-2 text-base md:text-lg /* mobile */">
+                        {post.title}
+                      </h3>
+                      <p className="text-slate-600 text-sm mb-3 md:mb-4">
                         {post.excerpt}
                       </p>
-                      <div className="flex items-center gap-4 text-slate-500 text-sm">
+
+                      <div className="flex flex-wrap gap-3 text-slate-500 text-xs md:text-sm /* mobile */">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
                           {post.date}
@@ -234,8 +252,7 @@ export function BlogPage() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="bg-slate-900 text-slate-400 py-8 px-4">
+        <footer className="bg-slate-900 text-slate-400 py-6 px-4 text-sm md:text-base /* mobile */">
           <div className="max-w-7xl mx-auto text-center">
             <p>&copy; 2025 GF-Kin. All rights reserved.</p>
           </div>
@@ -244,18 +261,25 @@ export function BlogPage() {
     );
   }
 
+  {
+    /* ——— MAIN BLOG LIST PAGE ——— */
+  }
+
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 py-16 px-4">
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 py-12 md:py-16 px-3 md:px-4 /* mobile */">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-slate-900 mb-6">Health & Wellness Blog</h1>
-          <p className="text-slate-600 max-w-2xl mx-auto mb-8">
-            Explore insights, tips, and expert advice on kinesiology, wellness,
-            and holistic health to support your journey to optimal wellbeing.
+          <h1 className="text-slate-900 text-3xl md:text-5xl font-semibold mb-4 md:mb-6 /* mobile */">
+            Health & Wellness Blog
+          </h1>
+
+          <p className="text-slate-600 max-w-xl mx-auto text-sm md:text-base mb-6 md:mb-8 /* mobile */">
+            Explore insights, tips, and expert advice on kinesiology and
+            holistic wellness.
           </p>
 
-          {/* Search Bar */}
+          {/* Search */}
           <div className="max-w-xl mx-auto">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -264,7 +288,7 @@ export function BlogPage() {
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
+                className="w-full pl-12 pr-4 py-3 md:py-4 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white text-sm md:text-base /* mobile */"
               />
             </div>
           </div>
@@ -272,14 +296,14 @@ export function BlogPage() {
       </section>
 
       {/* Categories */}
-      <section className="py-8 px-4 bg-white border-b border-slate-200 sticky top-16 z-40">
+      <section className="py-4 md:py-8 px-3 md:px-4 bg-white border-b border-slate-200 sticky top-16 z-40 /* mobile */">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="flex gap-3 overflow-x-auto no-scrollbar md:flex-wrap justify-start md:justify-center /* mobile */">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm md:text-base transition-colors ${
                   selectedCategory === category
                     ? "bg-emerald-600 text-white"
                     : "bg-slate-100 text-slate-700 hover:bg-slate-200"
@@ -292,41 +316,49 @@ export function BlogPage() {
         </div>
       </section>
 
-      {/* Blog Posts Grid */}
-      <section className="py-16 px-4 bg-white">
+      {/* Posts Grid */}
+      <section className="py-12 md:py-16 px-3 md:px-4 bg-white /* mobile */">
         <div className="max-w-7xl mx-auto">
           {filteredPosts.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-slate-600">
+            <div className="text-center py-12">
+              <p className="text-slate-600 text-sm md:text-base">
                 No articles found matching your search.
               </p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 /* mobile */">
               {filteredPosts.map((post) => (
                 <article
                   key={post.id}
                   onClick={() => setSelectedPost(post)}
                   className="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
                 >
-                  <div className="h-56 overflow-hidden">
+                  <div className="h-44 md:h-56 overflow-hidden /* mobile */">
                     <ImageWithFallback
                       src={post.image}
                       alt={post.title}
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 mb-3">
+
+                  <div className="p-4 md:p-6 /* mobile */">
+                    <div className="flex items-center gap-2 mb-2 md:mb-3">
                       <Tag className="w-4 h-4 text-emerald-600" />
-                      <span className="text-emerald-600 text-sm">
+                      <span className="text-emerald-600 text-xs md:text-sm">
                         {post.category}
                       </span>
                     </div>
-                    <h3 className="text-slate-900 mb-3">{post.title}</h3>
-                    <p className="text-slate-600 mb-4">{post.excerpt}</p>
+
+                    <h3 className="text-slate-900 mb-2 md:mb-3 text-base md:text-lg /* mobile */">
+                      {post.title}
+                    </h3>
+
+                    <p className="text-slate-600 text-sm md:text-base mb-3 md:mb-4 /* mobile */">
+                      {post.excerpt}
+                    </p>
+
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4 text-slate-500 text-sm">
+                      <div className="flex items-center gap-3 md:gap-4 text-slate-500 text-xs md:text-sm /* mobile */">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
                           {post.date}
@@ -336,7 +368,8 @@ export function BlogPage() {
                           {post.readTime}
                         </span>
                       </div>
-                      <ArrowRight className="w-5 h-5 text-emerald-600" />
+
+                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-emerald-600 /* mobile */" />
                     </div>
                   </div>
                 </article>
@@ -345,34 +378,6 @@ export function BlogPage() {
           )}
         </div>
       </section>
-
-      {/* Newsletter Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-emerald-600 to-teal-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-white mb-6">Stay Updated</h2>
-          <p className="text-emerald-50 mb-8 max-w-2xl mx-auto">
-            Subscribe to our newsletter to receive the latest articles, tips,
-            and wellness insights directly in your inbox.
-          </p>
-          <div className="flex gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-300"
-            />
-            <button className="px-6 py-3 bg-white text-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors">
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-8 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <p>&copy; 2025 GF-Kin. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 }

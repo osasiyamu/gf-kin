@@ -27,18 +27,20 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500">
               <Activity className="w-6 h-6 text-white" strokeWidth={2.5} />
             </div>
-            <span className="text-slate-800 font-medium tracking-wide">
+
+            {/* Mobile: smaller text | Desktop: unchanged */}
+            <span className="text-slate-800 font-semibold text-base md:text-lg tracking-wide">
               GF-Kin
             </span>
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-8">
+          <div className="hidden md:flex gap-8 text-[15px]">
             <button
               onClick={() => onNavigate("home")}
               className={`transition-colors ${
                 currentPage === "home"
-                  ? "text-emerald-600"
+                  ? "text-emerald-600 font-medium"
                   : "text-slate-600 hover:text-emerald-600"
               }`}
             >
@@ -49,7 +51,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               onClick={() => onNavigate("services")}
               className={`transition-colors ${
                 currentPage === "services"
-                  ? "text-emerald-600"
+                  ? "text-emerald-600 font-medium"
                   : "text-slate-600 hover:text-emerald-600"
               }`}
             >
@@ -60,7 +62,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               onClick={() => onNavigate("blog")}
               className={`transition-colors ${
                 currentPage === "blog"
-                  ? "text-emerald-600"
+                  ? "text-emerald-600 font-medium"
                   : "text-slate-600 hover:text-emerald-600"
               }`}
             >
@@ -91,15 +93,15 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
         {/* Mobile Menu */}
         {open && (
           <div className="md:hidden pb-4 animate-slide-down">
-            <div className="flex flex-col gap-3 pt-2">
+            <div className="flex flex-col gap-1 pt-2">
               <button
                 onClick={() => {
                   onNavigate("home");
                   setOpen(false);
                 }}
-                className={`px-2 py-2 text-left text-base ${
+                className={`px-3 py-2 text-left text-[15px] ${
                   currentPage === "home"
-                    ? "text-emerald-600 font-medium"
+                    ? "text-emerald-600 font-semibold"
                     : "text-slate-700"
                 }`}
               >
@@ -111,9 +113,9 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   onNavigate("services");
                   setOpen(false);
                 }}
-                className={`px-2 py-2 text-left text-base ${
+                className={`px-3 py-2 text-left text-[15px] ${
                   currentPage === "services"
-                    ? "text-emerald-600 font-medium"
+                    ? "text-emerald-600 font-semibold"
                     : "text-slate-700"
                 }`}
               >
@@ -125,9 +127,9 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   onNavigate("blog");
                   setOpen(false);
                 }}
-                className={`px-2 py-2 text-left text-base ${
+                className={`px-3 py-2 text-left text-[15px] ${
                   currentPage === "blog"
-                    ? "text-emerald-600 font-medium"
+                    ? "text-emerald-600 font-semibold"
                     : "text-slate-700"
                 }`}
               >
@@ -139,7 +141,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   onNavigate("booking");
                   setOpen(false);
                 }}
-                className="mt-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-center"
+                className="mt-3 px-4 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-center text-[15px] font-medium"
               >
                 Book Appointment
               </button>

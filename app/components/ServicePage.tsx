@@ -17,116 +17,77 @@ interface ServicesPageProps {
 export function ServicesPage({ onNavigate }: ServicesPageProps) {
   const services = [
     {
-      icon: Activity,
-      title: "Muscle Testing & Assessment",
-      duration: "60 minutes",
-      price: "$90",
+      icon: Brain,
+      title: "Initial Assessment",
+      duration: "75 minutes",
+      price: "$95",
       description:
-        "Comprehensive muscle testing to identify imbalances, weaknesses, and blockages in your body's energy systems. Includes detailed assessment and personalized recommendations.",
-      benefits: [
-        "Identify energy blockages",
-        "Assess structural imbalances",
-        "Detect nutritional deficiencies",
-        "Evaluate stress responses",
-      ],
+        "Comprehensive intake including movement screening, injury history, postural assessment, goal setting, and personalized plan development.",
+      benefits: [],
+    },
+    {
+      icon: Activity,
+      title: "In-Home Kinesiology Session",
+      duration: "60 minutes",
+      price: "$80",
+      description:
+        "A full session focused on rehab, strength training, mobility, or functional living goals. Includes a mental/emotional readiness consultation.",
+      benefits: [],
     },
     {
       icon: Dumbbell,
-      title: "Movement Therapy",
-      duration: "75 minutes",
+      title: "In-Home Kinesiology Session",
+      duration: "90 minutes",
       price: "$110",
       description:
-        "Personalized movement and exercise therapy designed to correct imbalances, improve mobility, and enhance overall physical function.",
-      benefits: [
-        "Improve range of motion",
-        "Strengthen weak muscle groups",
-        "Correct postural issues",
-        "Reduce pain and discomfort",
-      ],
-    },
-    {
-      icon: Brain,
-      title: "Stress & Emotional Balance",
-      duration: "60 minutes",
-      price: "$90",
-      description:
-        "Address emotional and psychological stressors through specialized kinesiology techniques that restore balance to your nervous system.",
-      benefits: [
-        "Reduce anxiety and stress",
-        "Improve emotional resilience",
-        "Release trapped emotions",
-        "Enhance mental clarity",
-      ],
+        "Ideal for complex rehab needs, progressive strength training, or sessions requiring both physical work and deeper emotional support.",
+      benefits: [],
     },
     {
       icon: Zap,
-      title: "Energy Balancing",
-      duration: "60 minutes",
-      price: "$90",
+      title: "Progress Review",
+      duration: "30 minutes (Add-On)",
+      price: "$40",
       description:
-        "Restore optimal energy flow throughout your body using meridian therapy and energy balancing techniques.",
-      benefits: [
-        "Boost vitality and energy",
-        "Balance chakras and meridians",
-        "Enhance overall wellbeing",
-        "Improve sleep quality",
-      ],
-    },
-    {
-      icon: Heart,
-      title: "Pain Management",
-      duration: "75 minutes",
-      price: "$110",
-      description:
-        "Comprehensive approach to managing chronic pain through kinesiology, addressing both physical and energetic causes.",
-      benefits: [
-        "Reduce chronic pain",
-        "Identify pain triggers",
-        "Natural pain relief techniques",
-        "Long-term management strategies",
-      ],
-    },
-    {
-      icon: Users,
-      title: "Sports Performance",
-      duration: "90 minutes",
-      price: "$130",
-      description:
-        "Optimize athletic performance through specialized testing, movement analysis, and performance enhancement techniques.",
-      benefits: [
-        "Enhance athletic performance",
-        "Prevent sports injuries",
-        "Improve recovery time",
-        "Optimize training programs",
-      ],
+        "Optional check-ins for clients wanting quicker reassessments, exercise program updates, or emotional regulation support.",
+      benefits: [],
     },
   ];
 
   const packages = [
     {
-      name: "Starter Package",
-      sessions: "3 Sessions",
-      price: "$250",
-      savings: "Save $20",
+      name: "Strength or Rehab Package",
+      sessions: "5 Sessions",
+      price: "$375",
+      savings: "Save $25",
       description:
-        "Perfect for trying kinesiology and experiencing initial results.",
+        "For clients wanting consistent progress and a structured plan.",
     },
     {
-      name: "Wellness Package",
-      sessions: "6 Sessions",
-      price: "$480",
+      name: "Mobility & Performance Package",
+      sessions: "10 Sessions",
+      price: "$740",
       savings: "Save $60",
       description:
-        "Ideal for addressing specific health goals with consistent care.",
+        "Best for long-term rehab, aging support, or full strength cycles.",
       popular: true,
     },
     {
-      name: "Transformation Package",
-      sessions: "10 Sessions",
-      price: "$750",
-      savings: "Save $150",
+      name: "Functional Living Program",
+      sessions: "12 Sessions",
+      price: "$920",
+      savings: "Save $140",
       description:
-        "Comprehensive program for deep healing and lasting transformation.",
+        "Weekly sessions supporting aging clients, disabilities, and independent ADLs",
+      popular: true,
+    },
+    {
+      name: "Accountability Add-On",
+      sessions: "12 Sessions",
+      price: "$20",
+      savings: "weekly",
+      description:
+        "Includes text check-ins, habit support, and personalized home exercises",
     },
   ];
 
@@ -146,13 +107,13 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
       {/* Services Grid */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
                 <div
                   key={index}
-                  className="bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-shadow"
+                  className="bg-white border border-slate-400 rounded-xl p-6 hover:shadow-lg transition-shadow"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-100">
@@ -169,7 +130,7 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
                   <h3 className="text-slate-900 mb-3">{service.title}</h3>
                   <p className="text-slate-600 mb-4">{service.description}</p>
 
-                  <div className="border-t border-slate-200 pt-4">
+                  {/* <div className="border-t border-slate-200 pt-4">
                     <div className="text-slate-700 text-sm mb-2">
                       Key Benefits:
                     </div>
@@ -184,7 +145,7 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
               );
             })}
@@ -203,7 +164,7 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-4 gap-8">
             {packages.map((pkg, index) => (
               <div
                 key={index}
@@ -223,16 +184,18 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
                 <div className="text-slate-900 mb-2">{pkg.price}</div>
                 <div className="text-emerald-600 mb-6">{pkg.savings}</div>
                 <p className="text-slate-600 mb-6">{pkg.description}</p>
-                <button
-                  onClick={() => onNavigate("booking")}
-                  className={`w-full py-3 rounded-lg transition-colors ${
-                    pkg.popular
-                      ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                      : "border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50"
-                  }`}
-                >
-                  Select Package
-                </button>
+                <footer className="">
+                  <button
+                    onClick={() => onNavigate("booking")}
+                    className={`w-full py-3 rounded-lg transition-colors ${
+                      pkg.popular
+                        ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                        : "border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50"
+                    }`}
+                  >
+                    Select Package
+                  </button>
+                </footer>
               </div>
             ))}
           </div>
